@@ -6,7 +6,7 @@ createApp({
         return {
             Users: [],
             Gender: 'female',
-            Amount: 0,
+            Amount: 5,
             Log: false,
             Url: 'https://countryflagsapi.com/png/',
             User: '',
