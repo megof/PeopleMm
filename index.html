@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="root">
+        <div v-show="!Log">
+            <section class="vh-100">
+                <div class="container-fluid h-custom">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col-md-9 col-lg-6 col-xl-5">
+                            <img src="https://img.freepik.com/free-vector/access-control-system-abstract-concept_335657-3180.jpg"
+                                class="img-fluid" alt="Sample image">
+                        </div>
+                        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="form3Example3">Username</label>
+                                <input v-model="User" type="Username" id="form3Example3"
+                                    class="form-control form-control-lg" placeholder="Enter a valid Username"
+                                    required />
+                            </div>
+                            <div class="form-outline mb-3">
+                                <label class="form-label" for="form3Example4">Password</label>
+                                <input v-model="Password" type="password" id="form3Example4"
+                                    class="form-control form-control-lg" placeholder="Enter password" required />
+                            </div>
+                            <div class="text-center text-lg-start mt-4 pt-2">
+                                <button @click="Login" type="button" class="btn btn-primary btn-lg"
+                                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div v-show="Log">
+            <div class="form-outline mb-4">
+                <nav class="navbar navbar-light bg-light">
+                    <div v-for="use in Userl">
+                        <img :src=use.picture.thumbnail alt="" class="profile">
+                        <a class="navbar-brand" >{{use.login.username}}</a>
+                    </div>
+                    <div class="form-inline">
+                        <button class="btn btn-outline-danger my-2 my-sm-0" @click="Logout">Logout</button>
+                    </div>
+                </nav>
+                <select v-model="Gender" class="form-select">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <div class="text-center">
+                    <input v-model="Amount" type="number" class="mr-2">
+                    <button @click="Results" type="button" class="btn btn-primary ml-2"
+                        style="padding-left: 2.5rem; padding-right: 2.5rem;">Filter</button>
+                </div>
+            </div>
+            <table class="table table-striped tbl">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">
+                        </th>
+                        <th scope="col">
+                            Name
+                        </th>
+                        <th scope="col">
+                            Age
+                        </th>
+                        <th scope="col">
+                            Country
+                        </th>
+                        <th scope="col">
+                            Mail
+                        </th>
+                        <th scope="col">
+                            Phone
+                        </th>
+                        <th scope="col">
+                            Cell
+                        </th>
+                    </tr>
+                </thead>
+                <tr v-for="(data, index) in Users" :value="index" :key="index"
+                    v-show="Gender==data.gender && User!=data.login.username">
+                    <td><img :src=data.picture.thumbnail alt="" class="profile"></td>
+                    <td>{{data.name.first}} {{data.name.last}}</td>
+                    <td>{{data.dob.age}}</td>
+                    <td><img crossorigin="anonymous" :src=Url+data.location.country class="flag" alt="asdas"></td>
+                    <td>{{data.email}}</td>
+                    <td>{{data.phone}}</td>
+                    <td>{{data.cell}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</html>
